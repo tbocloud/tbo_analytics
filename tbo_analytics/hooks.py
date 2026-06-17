@@ -29,6 +29,9 @@ fixtures = [
 	{"dt": "Print Format", "filters": [["name", "in", [
 		"Implementation Estimate Quote",
 	]]]},
+	{"dt": "Workspace", "filters": [["name", "in", [
+		"Implementation Estimates",
+	]]]},
 ]
 
 # Apps

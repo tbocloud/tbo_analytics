@@ -1,0 +1,225 @@
+{
+ "actions": [],
+ "creation": "2026-05-26 09:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "module_name",
+  "phase",
+  "priority",
+  "complexity",
+  "column_break_cb1",
+  "ai_estimated_hours",
+  "leader_estimated_hours",
+  "final_hours",
+  "total_hours",
+  "description_section",
+  "business_purpose",
+  "functional_description",
+  "technical_approach",
+  "integration_section",
+  "needs_integration",
+  "integration_system",
+  "integration_hours",
+  "column_break_cb2",
+  "needs_reports",
+  "report_count",
+  "report_hours",
+  "column_break_cb3",
+  "needs_dashboards",
+  "dashboard_count",
+  "dashboard_hours",
+  "planning_section",
+  "assumptions",
+  "risks",
+  "open_questions"
+ ],
+ "fields": [
+  {
+   "fieldname": "module_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Module Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "phase",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Phase",
+   "options": "\nPhase 1\nPhase 2\nPhase 3"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Priority",
+   "options": "\nMust Have\nShould Have\nNice to Have"
+  },
+  {
+   "default": "1.00",
+   "fieldname": "complexity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Complexity",
+   "precision": "2",
+   "description": "1.00 = Simple. 2.00 = Complex. Float in between (e.g. 1.50, 1.75). Drives the base hours, integration add, and per-report add."
+  },
+  {
+   "fieldname": "column_break_cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ai_estimated_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "AI Estimated Hours",
+   "placeholder": "Auto-calculated from complexity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "leader_estimated_hours",
+   "fieldtype": "Float",
+   "label": "Leader Hours"
+  },
+  {
+   "fieldname": "final_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Final Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "description_section",
+   "fieldtype": "Section Break",
+   "label": "Description"
+  },
+  {
+   "fieldname": "business_purpose",
+   "fieldtype": "Text Editor",
+   "label": "Business Purpose",
+   "placeholder": "What business problem does this solve? What happens today without it?"
+  },
+  {
+   "fieldname": "functional_description",
+   "fieldtype": "Text Editor",
+   "label": "Functional Description",
+   "placeholder": "Describe inputs, process, outputs, user roles, automation rules, integrations."
+  },
+  {
+   "fieldname": "technical_approach",
+   "fieldtype": "Text Editor",
+   "label": "Technical Approach",
+   "placeholder": "New DocType / extend existing / custom script / integration?"
+  },
+  {
+   "fieldname": "integration_section",
+   "fieldtype": "Section Break",
+   "label": "Integration · Reports · Dashboards"
+  },
+  {
+   "fieldname": "needs_integration",
+   "fieldtype": "Check",
+   "label": "Needs External Integration"
+  },
+  {
+   "depends_on": "eval:doc.needs_integration==1",
+   "fieldname": "integration_system",
+   "fieldtype": "Data",
+   "label": "External System"
+  },
+  {
+   "depends_on": "eval:doc.needs_integration==1",
+   "fieldname": "integration_hours",
+   "fieldtype": "Float",
+   "label": "Integration Hours"
+  },
+  {
+   "fieldname": "column_break_cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "needs_reports",
+   "fieldtype": "Check",
+   "label": "Custom Reports Needed"
+  },
+  {
+   "depends_on": "eval:doc.needs_reports==1",
+   "fieldname": "report_count",
+   "fieldtype": "Int",
+   "label": "No. of Reports"
+  },
+  {
+   "depends_on": "eval:doc.needs_reports==1",
+   "fieldname": "report_hours",
+   "fieldtype": "Float",
+   "label": "Report Hours",
+   "description": "Auto-suggested: 8 hrs × complexity × No. of Reports. Override if you know better."
+  },
+  {
+   "fieldname": "column_break_cb3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "needs_dashboards",
+   "fieldtype": "Check",
+   "label": "Custom Dashboards Needed",
+   "description": "Tick if the client needs new dashboards (charts, KPI cards, drill-down views)."
+  },
+  {
+   "depends_on": "eval:doc.needs_dashboards==1",
+   "fieldname": "dashboard_count",
+   "fieldtype": "Int",
+   "label": "No. of Dashboards"
+  },
+  {
+   "depends_on": "eval:doc.needs_dashboards==1",
+   "fieldname": "dashboard_hours",
+   "fieldtype": "Float",
+   "label": "Dashboard Hours",
+   "description": "Auto-suggested: 12 hrs × complexity × No. of Dashboards. Override if you know better."
+  },
+  {
+   "fieldname": "planning_section",
+   "fieldtype": "Section Break",
+   "label": "Planning Notes"
+  },
+  {
+   "fieldname": "assumptions",
+   "fieldtype": "Text Editor",
+   "label": "Assumptions",
+   "placeholder": "List all assumptions e.g. client provides API docs, max 3 report templates."
+  },
+  {
+   "fieldname": "risks",
+   "fieldtype": "Text Editor",
+   "label": "Risks",
+   "placeholder": "What could make this take longer? e.g. requirement changes, third-party delays."
+  },
+  {
+   "fieldname": "open_questions",
+   "fieldtype": "Text Editor",
+   "label": "Open Questions",
+   "placeholder": "Questions that must be answered before finalising scope."
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-05-26 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "tbo analytics",
+ "name": "Custom Module Request",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

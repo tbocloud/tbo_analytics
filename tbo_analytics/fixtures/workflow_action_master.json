@@ -1,0 +1,11 @@
+[
+ {"doctype": "Workflow Action Master", "name": "Submit for Review", "workflow_action_name": "Submit for Review"},
+ {"doctype": "Workflow Action Master", "name": "Approve",           "workflow_action_name": "Approve"},
+ {"doctype": "Workflow Action Master", "name": "Request Revision",  "workflow_action_name": "Request Revision"},
+ {"doctype": "Workflow Action Master", "name": "Resubmit",          "workflow_action_name": "Resubmit"},
+ {"doctype": "Workflow Action Master", "name": "Mark Won",          "workflow_action_name": "Mark Won"},
+ {"doctype": "Workflow Action Master", "name": "Mark Lost",         "workflow_action_name": "Mark Lost"},
+ {"doctype": "Workflow Action Master", "name": "Put on Hold",       "workflow_action_name": "Put on Hold"},
+ {"doctype": "Workflow Action Master", "name": "Resume",            "workflow_action_name": "Resume"},
+ {"doctype": "Workflow Action Master", "name": "Mark Delivered",    "workflow_action_name": "Mark Delivered"}
+]

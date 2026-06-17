@@ -1,0 +1,27 @@
+[
+ {
+  "doctype": "Dashboard",
+  "name": "Implementation Overview",
+  "dashboard_name": "Implementation Overview",
+  "module": "tbo analytics",
+  "is_public": 1,
+  "charts": [
+   {
+    "chart": "Estimates by Status",
+    "width": "Half"
+   },
+   {
+    "chart": "Revenue Pipeline by Status",
+    "width": "Half"
+   },
+   {
+    "chart": "Estimates Created per Month",
+    "width": "Full"
+   },
+   {
+    "chart": "Won Estimates - Revenue by Client",
+    "width": "Full"
+   }
+  ]
+ }
+]

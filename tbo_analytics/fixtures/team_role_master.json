@@ -1,0 +1,15 @@
+[
+ {"doctype": "Team Role Master", "name": "Project Manager",              "role_name": "Project Manager",              "seniority": "Lead",   "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Senior Functional Consultant", "role_name": "Senior Functional Consultant", "seniority": "Senior", "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Junior Functional Consultant", "role_name": "Junior Functional Consultant", "seniority": "Junior", "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Senior Developer",             "role_name": "Senior Developer",             "seniority": "Senior", "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Junior Developer",             "role_name": "Junior Developer",             "seniority": "Junior", "is_active": 1},
+ {"doctype": "Team Role Master", "name": "QA / Tester",                  "role_name": "QA / Tester",                  "seniority": "Mid",    "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Business Analyst",             "role_name": "Business Analyst",             "seniority": "Mid",    "is_active": 1},
+ {"doctype": "Team Role Master", "name": "DevOps Engineer",              "role_name": "DevOps Engineer",              "seniority": "Senior", "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Project Coordinator",          "role_name": "Project Coordinator",          "seniority": "Mid",    "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Support Engineer",             "role_name": "Support Engineer",             "seniority": "Mid",    "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Training Specialist",          "role_name": "Training Specialist",          "seniority": "Mid",    "is_active": 1},
+ {"doctype": "Team Role Master", "name": "UX Designer",                  "role_name": "UX Designer",                  "seniority": "Mid",    "is_active": 1},
+ {"doctype": "Team Role Master", "name": "Data Migration Specialist",    "role_name": "Data Migration Specialist",    "seniority": "Senior", "is_active": 1}
+]

@@ -1,0 +1,35 @@
+[
+ {
+  "doctype": "Workflow",
+  "name": "Implementation Estimate Workflow",
+  "workflow_name": "Implementation Estimate Workflow",
+  "document_type": "Implementation Estimate",
+  "is_active": 1,
+  "override_status": 1,
+  "workflow_state_field": "status",
+  "states": [
+   {"state": "Draft",              "doc_status": "0", "allow_edit": "Projects Manager"},
+   {"state": "Under Review",       "doc_status": "0", "allow_edit": "Project Approver"},
+   {"state": "Revision Requested", "doc_status": "0", "allow_edit": "Projects Manager"},
+   {"state": "Approved",           "doc_status": "0", "allow_edit": "Project Approver"},
+   {"state": "Won",                "doc_status": "1", "allow_edit": "Project Approver"},
+   {"state": "Lost",               "doc_status": "1", "allow_edit": "Project Approver"},
+   {"state": "On Hold",            "doc_status": "0", "allow_edit": "Project Approver"},
+   {"state": "Delivered",          "doc_status": "1", "allow_edit": "Project Approver"}
+  ],
+  "transitions": [
+   {"state": "Draft",              "action": "Submit for Review", "next_state": "Under Review",       "allowed": "Projects Manager"},
+   {"state": "Under Review",       "action": "Approve",            "next_state": "Approved",           "allowed": "Project Approver"},
+   {"state": "Under Review",       "action": "Request Revision",   "next_state": "Revision Requested", "allowed": "Project Approver"},
+   {"state": "Revision Requested", "action": "Resubmit",           "next_state": "Under Review",       "allowed": "Projects Manager"},
+   {"state": "Approved",           "action": "Mark Won",           "next_state": "Won",                "allowed": "Project Approver"},
+   {"state": "Approved",           "action": "Mark Lost",          "next_state": "Lost",               "allowed": "Project Approver"},
+   {"state": "Draft",              "action": "Put on Hold",        "next_state": "On Hold",            "allowed": "Project Approver"},
+   {"state": "Under Review",       "action": "Put on Hold",        "next_state": "On Hold",            "allowed": "Project Approver"},
+   {"state": "Revision Requested", "action": "Put on Hold",        "next_state": "On Hold",            "allowed": "Project Approver"},
+   {"state": "Approved",           "action": "Put on Hold",        "next_state": "On Hold",            "allowed": "Project Approver"},
+   {"state": "On Hold",            "action": "Resume",             "next_state": "Draft",              "allowed": "Project Approver"},
+   {"state": "Won",                "action": "Mark Delivered",     "next_state": "Delivered",          "allowed": "Project Approver"}
+  ]
+ }
+]

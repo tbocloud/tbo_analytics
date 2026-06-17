@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "creation": "2026-05-26 09:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cost_item",
+  "category",
+  "column_break_cb1",
+  "monthly_total_cost",
+  "allocation_method",
+  "project_share_pct",
+  "project_duration_months",
+  "allocated_amount",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "cost_item",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cost Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "\nHR & Admin\nFinance\nManagement\nOffice\nUtilities\nOther",
+   "description": "Auto-set from the GL account's parent when loaded from books. Editable so you can re-tag rows for better category roll-ups."
+  },
+  {
+   "fieldname": "column_break_cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "monthly_total_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Monthly Cost (\u20b9)",
+   "reqd": 1,
+   "description": "Auto-populated from books via 'Load Indirect Costs from Books'. Override directly if you know the number better."
+  },
+  {
+   "fieldname": "allocation_method",
+   "fieldtype": "Select",
+   "label": "Driver (auto-set)",
+   "options": "\nHeadcount\nLabour Hours\nProject Count\nRevenue\nFixed Pct\nPer Head\nBy Hours\nFixed %\nManual",
+   "description": "Auto-suggested from the account name when you click 'Load Indirect Costs from Books'. Change only if the suggestion is wrong for this specific account. The controller uses this to compute Project Share % automatically — except when set to 'Fixed Pct', in which case it honours whatever you type below."
+  },
+  {
+   "fieldname": "project_share_pct",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Project Share %",
+   "read_only_depends_on": "eval:doc.allocation_method && doc.allocation_method !== 'Fixed Pct' && doc.allocation_method !== 'Fixed %' && doc.allocation_method !== 'Manual'",
+   "description": "Auto-computed from the driver. Becomes editable only when Driver = Fixed Pct (then you type the % directly)."
+  },
+  {
+   "fieldname": "project_duration_months",
+   "fieldtype": "Int",
+   "label": "Duration (months)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "allocated_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Allocated to Project",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-05-26 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "tbo analytics",
+ "name": "Indirect Cost Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

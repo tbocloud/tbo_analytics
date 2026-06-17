@@ -1,0 +1,10 @@
+[
+ {"doctype": "Workflow State", "name": "Draft",              "workflow_state_name": "Draft",              "style": "Primary"},
+ {"doctype": "Workflow State", "name": "Under Review",       "workflow_state_name": "Under Review",       "style": "Warning"},
+ {"doctype": "Workflow State", "name": "Revision Requested", "workflow_state_name": "Revision Requested", "style": "Danger"},
+ {"doctype": "Workflow State", "name": "Approved",           "workflow_state_name": "Approved",           "style": "Success"},
+ {"doctype": "Workflow State", "name": "Won",                "workflow_state_name": "Won",                "style": "Success"},
+ {"doctype": "Workflow State", "name": "Lost",               "workflow_state_name": "Lost",               "style": "Danger"},
+ {"doctype": "Workflow State", "name": "On Hold",            "workflow_state_name": "On Hold",            "style": "Warning"},
+ {"doctype": "Workflow State", "name": "Delivered",          "workflow_state_name": "Delivered",          "style": "Inverse"}
+]

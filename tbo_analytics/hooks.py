@@ -5,6 +5,32 @@ app_description = "data science and analysis realted app"
 app_email = "tbo@gmail.com"
 app_license = "mit"
 
+# Fixtures — loaded by: bench --site [site] migrate
+# Order matters: Workflow State + Action Master must exist before the Workflow record.
+fixtures = [
+	{"dt": "ERP Module Master", "filters": []},
+	{"dt": "Integration Type Master", "filters": []},
+	{"dt": "Team Role Master", "filters": []},
+	{"dt": "Workflow State", "filters": [["name", "in", [
+		"Draft", "Under Review", "Revision Requested", "Approved", "Won", "Lost", "On Hold", "Delivered"
+	]]]},
+	{"dt": "Workflow Action Master", "filters": [["name", "in", [
+		"Submit for Review", "Approve", "Request Revision", "Resubmit",
+		"Mark Won", "Mark Lost", "Put on Hold", "Resume", "Mark Delivered"
+	]]]},
+	{"dt": "Workflow", "filters": [["name", "=", "Implementation Estimate Workflow"]]},
+	{"dt": "Dashboard Chart", "filters": [["module", "=", "tbo analytics"]]},
+	{"dt": "Dashboard", "filters": [["module", "=", "tbo analytics"]]},
+	# Custom fields we install on standard ERPNext doctypes. Filter keeps re-exports
+	# scoped to ours so we don't accidentally clobber other apps' custom fields.
+	{"dt": "Custom Field", "filters": [["fieldname", "in", [
+		"custom_implementation_estimate",
+	]]]},
+	{"dt": "Print Format", "filters": [["name", "in", [
+		"Implementation Estimate Quote",
+	]]]},
+]
+
 # Apps
 # ------------------
 
@@ -43,7 +69,9 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+	"Implementation Estimate": "public/js/implementation_estimate.js"
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -137,34 +165,40 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Implementation Estimate": {
+		"before_save": "tbo_analytics.tbo_analytics.handlers.calculate_ai_estimates",
+		"on_submit": "tbo_analytics.tbo_analytics.handlers.validate_completeness",
+	},
+	"Project": {
+		# When a Project is saved with custom_implementation_estimate set, mirror the
+		# link back onto the Implementation Estimate's linked_project field. Lets the
+		# JS button open a pre-filled new Project form and have the back-link establish
+		# itself on user save (no silent server insert).
+		"after_insert": "tbo_analytics.tbo_analytics.handlers.link_estimate_on_project_insert",
+		"on_trash":     "tbo_analytics.tbo_analytics.handlers.clear_estimate_link_on_project_delete",
+		# When a linked Project moves to status='Completed', auto-transition the connected
+		# Implementation Estimate from Won → Delivered so it stops counting in capacity /
+		# team-conflict checks.
+		"on_update":    "tbo_analytics.tbo_analytics.handlers.auto_mark_estimate_delivered",
+	},
+	"Task": {
+		"on_update": "tbo_analytics.tbo_analytics.handlers.update_time_coverage",
+	},
+	"Timesheet": {
+		"on_submit": "tbo_analytics.tbo_analytics.handlers.update_time_coverage",
+	},
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"tbo_analytics.tasks.all"
-# 	],
-# 	"daily": [
-# 		"tbo_analytics.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"tbo_analytics.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"tbo_analytics.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"tbo_analytics.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"weekly": [
+		"tbo_analytics.tbo_analytics.tasks.update_historical_averages",
+		"tbo_analytics.tbo_analytics.tasks.refresh_time_coverage_cache",
+	],
+}
 
 # Testing
 # -------

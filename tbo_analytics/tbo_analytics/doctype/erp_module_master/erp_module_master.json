@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "autoname": "field:module_name",
+ "creation": "2026-05-26 09:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "module_name",
+  "module_code",
+  "category",
+  "column_break_cb1",
+  "base_hours_complexity_1",
+  "base_hours_complexity_2",
+  "historical_avg_hours",
+  "historical_sample_count",
+  "details_section",
+  "description",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "fieldname": "module_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Module Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "module_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Module Code"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "Finance\nOperations\nHR\nCRM\nUtility"
+  },
+  {
+   "fieldname": "column_break_cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "base_hours_complexity_1",
+   "fieldtype": "Float",
+   "label": "Base Hours (Complexity 1)"
+  },
+  {
+   "fieldname": "base_hours_complexity_2",
+   "fieldtype": "Float",
+   "label": "Base Hours (Complexity 2)"
+  },
+  {
+   "fieldname": "historical_avg_hours",
+   "fieldtype": "Float",
+   "label": "Historical Avg Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "historical_sample_count",
+   "fieldtype": "Int",
+   "label": "Historical Sample Count",
+   "read_only": 1
+  },
+  {
+   "collapsible": 0,
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  }
+ ],
+ "links": [],
+ "modified": "2026-05-26 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "tbo analytics",
+ "name": "ERP Module Master",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "creation": "2026-05-26 09:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cost_item",
+  "category",
+  "column_break_cb1",
+  "total_monthly_company_cost",
+  "split_method",
+  "company_total_employees",
+  "project_team_size",
+  "project_duration_months",
+  "allocated_amount",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "cost_item",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cost Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "\nLaptop\nElectricity\nInternet\nEquipment\nSoftware\nOther",
+   "description": "Auto-set from the GL account's name when loaded from books. Editable for re-tagging."
+  },
+  {
+   "fieldname": "column_break_cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_monthly_company_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Monthly Company Cost",
+   "reqd": 1
+  },
+  {
+   "fieldname": "split_method",
+   "fieldtype": "Select",
+   "label": "Split Method",
+   "options": "\nPer Head\nBy Hours\nBy Project Count\nFixed Amount"
+  },
+  {
+   "fieldname": "company_total_employees",
+   "fieldtype": "Int",
+   "label": "Company Headcount",
+   "description": "Active employee count used for the per-head split. Editable — override if the auto-pulled value is stale."
+  },
+  {
+   "fieldname": "project_team_size",
+   "fieldtype": "Int",
+   "label": "Project Team Size"
+  },
+  {
+   "fieldname": "project_duration_months",
+   "fieldtype": "Int",
+   "label": "Duration (months)"
+  },
+  {
+   "fieldname": "allocated_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Allocated to Project",
+   "description": "Auto-computed from Total × team_size / headcount × duration. Edit to override the formula."
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-05-26 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "tbo analytics",
+ "name": "Infrastructure Cost Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

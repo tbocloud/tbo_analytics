@@ -1,0 +1,15 @@
+[
+  {"doctype": "ERP Module Master", "name": "Accounts", "module_name": "Accounts", "module_code": "ACC", "category": "Finance", "base_hours_complexity_1": 80, "base_hours_complexity_2": 130, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Inventory / Stock", "module_name": "Inventory / Stock", "module_code": "STK", "category": "Operations", "base_hours_complexity_1": 60, "base_hours_complexity_2": 100, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Purchase", "module_name": "Purchase", "module_code": "PUR", "category": "Operations", "base_hours_complexity_1": 40, "base_hours_complexity_2": 70, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Sales", "module_name": "Sales", "module_code": "SAL", "category": "Operations", "base_hours_complexity_1": 50, "base_hours_complexity_2": 85, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Manufacturing", "module_name": "Manufacturing", "module_code": "MFG", "category": "Operations", "base_hours_complexity_1": 80, "base_hours_complexity_2": 140, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "HR & Payroll", "module_name": "HR & Payroll", "module_code": "HRP", "category": "HR", "base_hours_complexity_1": 70, "base_hours_complexity_2": 120, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "CRM", "module_name": "CRM", "module_code": "CRM", "category": "CRM", "base_hours_complexity_1": 30, "base_hours_complexity_2": 55, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Projects Module", "module_name": "Projects Module", "module_code": "PRJ", "category": "Operations", "base_hours_complexity_1": 20, "base_hours_complexity_2": 40, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Assets", "module_name": "Assets", "module_code": "AST", "category": "Finance", "base_hours_complexity_1": 30, "base_hours_complexity_2": 55, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Quality", "module_name": "Quality", "module_code": "QLT", "category": "Operations", "base_hours_complexity_1": 25, "base_hours_complexity_2": 45, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "POS / Retail", "module_name": "POS / Retail", "module_code": "POS", "category": "Operations", "base_hours_complexity_1": 40, "base_hours_complexity_2": 75, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Healthcare", "module_name": "Healthcare", "module_code": "HLT", "category": "Utility", "base_hours_complexity_1": 60, "base_hours_complexity_2": 110, "is_active": 1},
+  {"doctype": "ERP Module Master", "name": "Education", "module_name": "Education", "module_code": "EDU", "category": "Utility", "base_hours_complexity_1": 55, "base_hours_complexity_2": 100, "is_active": 1}
+]

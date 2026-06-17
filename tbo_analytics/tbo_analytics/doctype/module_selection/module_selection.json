@@ -1,0 +1,249 @@
+{
+ "actions": [],
+ "creation": "2026-05-26 09:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "module",
+  "is_included",
+  "priority",
+  "phase",
+  "complexity",
+  "column_break_cb1",
+  "ai_estimated_hours",
+  "leader_estimated_hours",
+  "final_hours",
+  "total_module_hours",
+  "customization_section",
+  "customization_required",
+  "customization_type",
+  "cust_types_section",
+  "cust_custom_field",
+  "cust_custom_form",
+  "cust_workflow",
+  "cust_custom_report",
+  "cust_types_column_break",
+  "cust_print_format",
+  "cust_api_integration",
+  "cust_other",
+  "customization_description",
+  "column_break_cb2",
+  "customization_ai_hours",
+  "customization_manual_hours",
+  "customization_final_hours",
+  "notes_section",
+  "complexity_notes",
+  "row_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "module",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Module",
+   "options": "ERP Module Master",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "is_included",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Include"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Priority",
+   "options": "\nMust Have\nShould Have\nNice to Have\nFuture Phase"
+  },
+  {
+   "fieldname": "phase",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Phase",
+   "options": "\nPhase 1\nPhase 2\nPhase 3"
+  },
+  {
+   "default": "1.00",
+   "fieldname": "complexity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Complexity",
+   "precision": "2",
+   "description": "1.00 = Standard (no extra hours). 2.00 = Maximum complexity (2\u00d7 the base hours). Pick anywhere in between, e.g. 1.50, 1.75. Values outside [1.0, 2.0] are clamped on save."
+  },
+  {
+   "fieldname": "column_break_cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ai_estimated_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "AI Estimated Hours",
+   "placeholder": "Auto-calculated",
+   "read_only": 1
+  },
+  {
+   "fieldname": "leader_estimated_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Leader Estimate (hrs)"
+  },
+  {
+   "fieldname": "final_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Final Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_module_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Hours",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "customization_section",
+   "fieldtype": "Section Break",
+   "label": "Customization"
+  },
+  {
+   "fieldname": "customization_required",
+   "fieldtype": "Check",
+   "label": "Customization Needed"
+  },
+  {
+   "fieldname": "customization_type",
+   "fieldtype": "Select",
+   "label": "Customization Type (legacy)",
+   "options": "\nCustom Field\nCustom Form\nWorkflow\nCustom Report\nPrint Format\nAPI / Integration\nOther",
+   "hidden": 1,
+   "description": "Legacy single-select. Replaced by the multi-check section below. On next save, any value here auto-migrates to the matching checkbox."
+  },
+  {
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "cust_types_section",
+   "fieldtype": "Section Break",
+   "label": "Customization Types (tick all that apply)"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "cust_custom_field",
+   "fieldtype": "Check",
+   "label": "Custom Field (~4 h × complexity)"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "cust_custom_form",
+   "fieldtype": "Check",
+   "label": "Custom Form (~16 h × complexity)"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "cust_workflow",
+   "fieldtype": "Check",
+   "label": "Workflow (~12 h × complexity)"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "cust_custom_report",
+   "fieldtype": "Check",
+   "label": "Custom Report (~10 h × complexity)"
+  },
+  {
+   "fieldname": "cust_types_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "cust_print_format",
+   "fieldtype": "Check",
+   "label": "Print Format (~10 h × complexity)"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "cust_api_integration",
+   "fieldtype": "Check",
+   "label": "API / Integration (~24 h × complexity)"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "cust_other",
+   "fieldtype": "Check",
+   "label": "Other (~8 h × complexity)"
+  },
+  {
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "customization_description",
+   "fieldtype": "Text Editor",
+   "label": "Customization Details",
+   "placeholder": "Describe what the client needs that ERPNext doesn't provide out-of-the-box."
+  },
+  {
+   "fieldname": "column_break_cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "customization_ai_hours",
+   "fieldtype": "Float",
+   "label": "Customization AI Hours",
+   "placeholder": "Auto-calculated",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "customization_manual_hours",
+   "fieldtype": "Float",
+   "label": "Customization Manual Hours"
+  },
+  {
+   "depends_on": "eval:doc.customization_required==1",
+   "fieldname": "customization_final_hours",
+   "fieldtype": "Float",
+   "label": "Customization Final Hours",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "depends_on": "eval:flt(doc.complexity) > 1.5",
+   "fieldname": "complexity_notes",
+   "fieldtype": "Small Text",
+   "label": "Complexity Notes"
+  },
+  {
+   "fieldname": "row_notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-05-26 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "tbo analytics",
+ "name": "Module Selection",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

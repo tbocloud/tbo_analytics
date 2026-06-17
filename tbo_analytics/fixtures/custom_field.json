@@ -1,0 +1,15 @@
+[
+ {
+  "doctype": "Custom Field",
+  "name": "Project-custom_implementation_estimate",
+  "dt": "Project",
+  "fieldname": "custom_implementation_estimate",
+  "label": "Implementation Estimate",
+  "fieldtype": "Link",
+  "options": "Implementation Estimate",
+  "insert_after": "project_name",
+  "read_only": 0,
+  "no_copy": 1,
+  "description": "Source estimate this project was created from. Set automatically when the project is created from the Implementation Estimate form."
+ }
+]

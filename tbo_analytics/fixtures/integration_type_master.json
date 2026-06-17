@@ -1,0 +1,19 @@
+[
+  {"doctype": "Integration Type Master", "name": "WhatsApp Business API", "integration_type": "WhatsApp Business API", "base_hours_c1": 24, "base_hours_c2": 40, "complexity_notes": "Real-time messaging = C2"},
+  {"doctype": "Integration Type Master", "name": "Biometric Device", "integration_type": "Biometric Device", "base_hours_c1": 20, "base_hours_c2": 35, "complexity_notes": "Depends on device SDK"},
+  {"doctype": "Integration Type Master", "name": "Mobile App (Android)", "integration_type": "Mobile App (Android)", "base_hours_c1": 40, "base_hours_c2": 80, "complexity_notes": "Per platform"},
+  {"doctype": "Integration Type Master", "name": "Mobile App (iOS)", "integration_type": "Mobile App (iOS)", "base_hours_c1": 40, "base_hours_c2": 80, "complexity_notes": "Per platform"},
+  {"doctype": "Integration Type Master", "name": "Website Integration", "integration_type": "Website Integration", "base_hours_c1": 20, "base_hours_c2": 40, "complexity_notes": "CMS type matters"},
+  {"doctype": "Integration Type Master", "name": "Payment Gateway", "integration_type": "Payment Gateway", "base_hours_c1": 16, "base_hours_c2": 30, "complexity_notes": "Depends on provider"},
+  {"doctype": "Integration Type Master", "name": "SMS Gateway", "integration_type": "SMS Gateway", "base_hours_c1": 8, "base_hours_c2": 16},
+  {"doctype": "Integration Type Master", "name": "ERP-to-ERP Sync", "integration_type": "ERP-to-ERP Sync", "base_hours_c1": 40, "base_hours_c2": 80, "complexity_notes": "Real-time = C2"},
+  {"doctype": "Integration Type Master", "name": "Tally Import", "integration_type": "Tally Import", "base_hours_c1": 32, "base_hours_c2": 56, "complexity_notes": "Data quality dependent"},
+  {"doctype": "Integration Type Master", "name": "Bank Feed", "integration_type": "Bank Feed", "base_hours_c1": 16, "base_hours_c2": 28},
+  {"doctype": "Integration Type Master", "name": "Government Portal (GST/TDS)", "integration_type": "Government Portal (GST/TDS)", "base_hours_c1": 20, "base_hours_c2": 36},
+  {"doctype": "Integration Type Master", "name": "Email Service", "integration_type": "Email Service", "base_hours_c1": 8, "base_hours_c2": 16},
+  {"doctype": "Integration Type Master", "name": "Barcode / QR Scanner", "integration_type": "Barcode / QR Scanner", "base_hours_c1": 12, "base_hours_c2": 24},
+  {"doctype": "Integration Type Master", "name": "E-commerce Platform", "integration_type": "E-commerce Platform", "base_hours_c1": 32, "base_hours_c2": 64},
+  {"doctype": "Integration Type Master", "name": "Accounting Software", "integration_type": "Accounting Software", "base_hours_c1": 24, "base_hours_c2": 48},
+  {"doctype": "Integration Type Master", "name": "GPS / Location", "integration_type": "GPS / Location", "base_hours_c1": 16, "base_hours_c2": 32},
+  {"doctype": "Integration Type Master", "name": "Custom API", "integration_type": "Custom API", "base_hours_c1": 24, "base_hours_c2": 48}
+]

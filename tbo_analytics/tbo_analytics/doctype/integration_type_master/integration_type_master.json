@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "autoname": "field:integration_type",
+ "creation": "2026-05-26 09:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "integration_type",
+  "column_break_cb1",
+  "base_hours_c1",
+  "base_hours_c2",
+  "notes_section",
+  "description",
+  "complexity_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "integration_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Integration Type",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "base_hours_c1",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Base Hours (C1 \u2014 Standard)"
+  },
+  {
+   "fieldname": "base_hours_c2",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Base Hours (C2 \u2014 Complex)"
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "fieldname": "complexity_notes",
+   "fieldtype": "Small Text",
+   "label": "Complexity Notes"
+  }
+ ],
+ "links": [],
+ "modified": "2026-05-26 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "tbo analytics",
+ "name": "Integration Type Master",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

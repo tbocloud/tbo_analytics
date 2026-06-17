@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "creation": "2026-05-26 09:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cost_item",
+  "category",
+  "vendor",
+  "column_break_cb1",
+  "total_monthly_company_cost",
+  "project_share_pct",
+  "monthly_cost",
+  "project_duration_months",
+  "is_one_time",
+  "total_cost",
+  "notes",
+  "is_allocated_from_books",
+  "account",
+  "allocation_method"
+ ],
+ "fields": [
+  {
+   "fieldname": "cost_item",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cost Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "Category",
+   "options": "\nHosting\nSoftware License\nThird-party API\nTools\nTravel\nOther"
+  },
+  {
+   "fieldname": "vendor",
+   "fieldtype": "Data",
+   "label": "Vendor / Provider"
+  },
+  {
+   "fieldname": "column_break_cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_monthly_company_cost",
+   "fieldtype": "Currency",
+   "label": "Total Monthly (Company)",
+   "description": "Optional: what the company pays company-wide each month for this service. Use this + Project Share % to auto-compute Monthly Cost. Leave blank if you'll type Monthly Cost directly."
+  },
+  {
+   "fieldname": "project_share_pct",
+   "fieldtype": "Float",
+   "label": "Project Share %",
+   "precision": "2",
+   "description": "Optional: what fraction of the Company Monthly Cost this project pays for. Use with Total Monthly (Company) above to auto-fill Monthly Cost."
+  },
+  {
+   "fieldname": "monthly_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Monthly Cost (₹)",
+   "reqd": 1,
+   "description": "Per-month cost charged to THIS project. Auto-fills from Total Monthly (Company) × Project Share % when both are set, but you can override directly."
+  },
+  {
+   "fieldname": "project_duration_months",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Duration (months)",
+   "description": "Default = project duration from Section J. Override here if this cost runs for a different number of months (e.g. AWS billed only for 6 of a 9-month project)."
+  },
+  {
+   "fieldname": "is_one_time",
+   "fieldtype": "Check",
+   "label": "One-time Cost",
+   "description": "Tick if paid once. Total = Monthly Cost. Otherwise Total = Monthly Cost × Duration."
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_allocated_from_books",
+   "fieldtype": "Check",
+   "label": "Shared (Legacy)",
+   "hidden": 1
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "label": "GL Account (Legacy)",
+   "options": "Account",
+   "hidden": 1
+  },
+  {
+   "fieldname": "allocation_method",
+   "fieldtype": "Select",
+   "label": "Driver (Legacy)",
+   "options": "\nHeadcount\nLabour Hours\nProject Count\nRevenue\nFixed Pct",
+   "hidden": 1
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-06-11 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "tbo analytics",
+ "name": "Direct Cost Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

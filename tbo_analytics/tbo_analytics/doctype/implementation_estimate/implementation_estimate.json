@@ -5,43 +5,64 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "tab_overview",
   "naming_series",
   "status",
   "section_a",
   "client_type",
   "client_name",
+  "industry",
+  "assigned_pre_sales",
+  "column_break_a1",
   "contact_person",
   "contact_full_name",
   "contact_email",
   "contact_mobile_no",
-  "industry",
-  "column_break_a1",
+  "column_break_a2",
+  "enquiry_date",
+  "expected_go_live",
+  "section_client_profile",
   "company_size",
   "number_of_users",
   "number_of_companies",
-  "column_break_a2",
+  "column_break_a3",
   "current_system",
   "project_type",
   "client_technical_level",
-  "column_break_a3",
-  "enquiry_date",
-  "expected_go_live",
-  "assigned_pre_sales",
   "column_break_a4",
   "data_migration_required",
   "migration_years",
   "section_a_notes",
   "pre_sales_notes",
+  "section_linked",
+  "linked_project",
+  "column_break_linked",
+  "linked_sales_order",
+  "tab_scope",
+  "section_j",
+  "grand_total_hours",
+  "column_break_j1",
+  "total_modules_hours",
+  "column_break_j2",
+  "total_custom_modules_hours",
+  "column_break_j3",
+  "total_integration_hours",
   "section_b",
   "module_selections",
   "section_c",
   "custom_module_requests",
   "section_d",
   "integration_requirements",
+  "tab_team",
+  "section_timeline",
+  "project_duration_months",
+  "column_break_timeline",
+  "blended_hourly_rate",
   "section_e",
   "team_allocation_summary_html",
   "team_members",
   "team_capacity_html",
+  "tab_costs",
   "section_g",
   "direct_costs",
   "section_h",
@@ -52,66 +73,70 @@
   "infrastructure_summary_html",
   "infrastructure_details_section",
   "infrastructure_costs",
-  "section_j",
-  "grand_total_hours",
-  "total_modules_hours",
-  "total_custom_modules_hours",
-  "total_integration_hours",
-  "column_break_j1",
-  "project_duration_months",
-  "blended_hourly_rate",
   "section_support",
   "monthly_support_hours",
   "support_duration_months",
-  "column_break_support1",
   "support_hourly_rate",
+  "column_break_support1",
   "total_support_hours",
   "total_support_cost",
-  "section_support_notes",
+  "column_break_support2",
   "support_notes",
-  "section_k",
+  "tab_pricing",
+  "section_cost_buildup",
   "team_cost_total",
   "direct_cost_total",
   "indirect_cost_total",
+  "column_break_cost1",
   "infrastructure_cost_total",
   "support_cost_in_grand_total",
   "grand_total_cost",
+  "section_k",
   "target_margin_pct",
   "column_break_k1",
   "floor_price",
-  "standard_price",
-  "premium_price",
   "column_break_k2",
+  "standard_price",
+  "column_break_k3",
+  "premium_price",
+  "section_quote",
   "recommended_band",
   "use_custom_price",
   "custom_price",
-  "custom_price_assessment_html",
-  "column_break_k3",
+  "column_break_quote1",
   "recommended_price",
   "margin_at_recommended",
+  "column_break_quote2",
   "price_per_hour",
   "amc_suggested",
+  "section_custom_price_assessment",
+  "custom_price_assessment_html",
   "section_k_notes",
   "pricing_notes",
+  "tab_analysis",
   "section_l",
-  "scenario_custom_pct",
-  "column_break_l1",
   "break_even_hours",
-  "column_break_l2",
+  "column_break_l1",
   "break_even_pct",
-  "column_break_l3",
+  "column_break_l2",
   "break_even_note",
   "section_l_scenarios",
+  "scenario_custom_pct",
+  "column_break_l3",
+  "column_break_l4",
+  "section_scenario_table",
   "scenario_table_html",
   "section_l_sensitivity",
   "sensitivity_table_html",
   "section_l_montecarlo",
-  "monte_carlo_html",
-  "section_linked",
-  "linked_project",
-  "linked_sales_order"
+  "monte_carlo_html"
  ],
  "fields": [
+  {
+   "fieldname": "tab_overview",
+   "fieldtype": "Tab Break",
+   "label": "Overview"
+  },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
@@ -134,7 +159,7 @@
   {
    "fieldname": "section_a",
    "fieldtype": "Section Break",
-   "label": "A. Client Details"
+   "label": "Client"
   },
   {
    "default": "Customer",
@@ -151,6 +176,23 @@
    "label": "Client",
    "options": "client_type",
    "reqd": 1
+  },
+  {
+   "fieldname": "industry",
+   "fieldtype": "Link",
+   "label": "Industry",
+   "options": "Industry Type"
+  },
+  {
+   "fieldname": "assigned_pre_sales",
+   "fieldtype": "Link",
+   "label": "Assigned Pre-Sales",
+   "options": "User"
+  },
+  {
+   "fieldname": "column_break_a1",
+   "fieldtype": "Column Break",
+   "label": "Contact"
   },
   {
    "fieldname": "contact_person",
@@ -180,14 +222,25 @@
    "read_only": 1
   },
   {
-   "fieldname": "industry",
-   "fieldtype": "Link",
-   "label": "Industry",
-   "options": "Industry Type"
+   "fieldname": "column_break_a2",
+   "fieldtype": "Column Break",
+   "label": "Timeline"
   },
   {
-   "fieldname": "column_break_a1",
-   "fieldtype": "Column Break"
+   "default": "Today",
+   "fieldname": "enquiry_date",
+   "fieldtype": "Date",
+   "label": "Enquiry Date"
+  },
+  {
+   "fieldname": "expected_go_live",
+   "fieldtype": "Date",
+   "label": "Expected Go-Live Date"
+  },
+  {
+   "fieldname": "section_client_profile",
+   "fieldtype": "Section Break",
+   "label": "Client Profile"
   },
   {
    "fieldname": "company_size",
@@ -208,7 +261,7 @@
    "label": "Number of Legal Entities"
   },
   {
-   "fieldname": "column_break_a2",
+   "fieldname": "column_break_a3",
    "fieldtype": "Column Break"
   },
   {
@@ -230,27 +283,6 @@
    "options": "\nNone\nBasic\nIntermediate\nAdvanced"
   },
   {
-   "fieldname": "column_break_a3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "Today",
-   "fieldname": "enquiry_date",
-   "fieldtype": "Date",
-   "label": "Enquiry Date"
-  },
-  {
-   "fieldname": "expected_go_live",
-   "fieldtype": "Date",
-   "label": "Expected Go-Live Date"
-  },
-  {
-   "fieldname": "assigned_pre_sales",
-   "fieldtype": "Link",
-   "label": "Assigned Pre-Sales",
-   "options": "User"
-  },
-  {
    "fieldname": "column_break_a4",
    "fieldtype": "Column Break"
   },
@@ -267,7 +299,10 @@
   },
   {
    "fieldname": "section_a_notes",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Pre-Sales Notes",
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.pre_sales_notes"
   },
   {
    "fieldname": "pre_sales_notes",
@@ -276,9 +311,79 @@
    "description": "Free-form notes about the client, conversations, expectations, or unusual scope items."
   },
   {
+   "fieldname": "section_linked",
+   "fieldtype": "Section Break",
+   "label": "Linked Records",
+   "depends_on": "eval:doc.linked_project || doc.linked_sales_order"
+  },
+  {
+   "fieldname": "linked_project",
+   "fieldtype": "Link",
+   "label": "Linked Project",
+   "options": "Project",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_linked",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "linked_sales_order",
+   "fieldtype": "Link",
+   "label": "Linked Sales Order",
+   "options": "Sales Order",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tab_scope",
+   "fieldtype": "Tab Break",
+   "label": "Scope"
+  },
+  {
+   "fieldname": "section_j",
+   "fieldtype": "Section Break",
+   "label": "Estimated Hours"
+  },
+  {
+   "fieldname": "grand_total_hours",
+   "fieldtype": "Float",
+   "label": "Grand Total Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_j1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_modules_hours",
+   "fieldtype": "Float",
+   "label": "Module Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_j2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_custom_modules_hours",
+   "fieldtype": "Float",
+   "label": "Custom Module Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_j3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_integration_hours",
+   "fieldtype": "Float",
+   "label": "Integration Hours",
+   "read_only": 1
+  },
+  {
    "fieldname": "section_b",
    "fieldtype": "Section Break",
-   "label": "B. Module Selection"
+   "label": "Standard Modules"
   },
   {
    "fieldname": "module_selections",
@@ -289,7 +394,7 @@
   {
    "fieldname": "section_c",
    "fieldtype": "Section Break",
-   "label": "C. Custom Module Requests"
+   "label": "Custom Modules"
   },
   {
    "fieldname": "custom_module_requests",
@@ -300,7 +405,7 @@
   {
    "fieldname": "section_d",
    "fieldtype": "Section Break",
-   "label": "D. Integration Requirements"
+   "label": "Integrations"
   },
   {
    "fieldname": "integration_requirements",
@@ -309,9 +414,35 @@
    "options": "Integration Requirement"
   },
   {
+   "fieldname": "tab_team",
+   "fieldtype": "Tab Break",
+   "label": "Team"
+  },
+  {
+   "fieldname": "section_timeline",
+   "fieldtype": "Section Break",
+   "label": "Timeline & Rate"
+  },
+  {
+   "fieldname": "project_duration_months",
+   "fieldtype": "Int",
+   "label": "Project Duration (months)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_timeline",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "blended_hourly_rate",
+   "fieldtype": "Currency",
+   "label": "Blended Hourly Rate",
+   "read_only": 1
+  },
+  {
    "fieldname": "section_e",
    "fieldtype": "Section Break",
-   "label": "E. Team Composition"
+   "label": "Team Members"
   },
   {
    "fieldname": "team_allocation_summary_html",
@@ -333,9 +464,14 @@
    "description": "Live cross-check against this employee's commitments on other open Implementation Estimates."
   },
   {
+   "fieldname": "tab_costs",
+   "fieldtype": "Tab Break",
+   "label": "Costs"
+  },
+  {
    "fieldname": "section_g",
    "fieldtype": "Section Break",
-   "label": "G. Direct Costs"
+   "label": "Direct Costs"
   },
   {
    "fieldname": "direct_costs",
@@ -344,10 +480,9 @@
    "options": "Direct Cost Item"
   },
   {
-   "collapsible": 1,
    "fieldname": "section_h",
    "fieldtype": "Section Break",
-   "label": "H. Indirect Costs"
+   "label": "Indirect Costs"
   },
   {
    "fieldname": "indirect_summary_html",
@@ -355,24 +490,24 @@
    "label": "Indirect Cost Summary"
   },
   {
-   "collapsible": 1,
    "fieldname": "indirect_details_section",
    "fieldtype": "Section Break",
-   "label": "Detailed line items",
-   "description": "Per-account breakdown auto-pulled from books. Click to expand. Reload via Actions → Load Indirect Costs from Books."
+   "label": "Indirect Cost Line Items",
+   "collapsible": 1,
+   "description": "Per-account breakdown pulled from the books by a Project Approver (Actions → Load Overheads from Books)."
   },
   {
    "fieldname": "indirect_costs",
    "fieldtype": "Table",
    "label": "Indirect Costs",
    "options": "Indirect Cost Item",
-   "description": "Pre-populated by 'Load Overheads from Books' (Actions menu). You can also add / edit / delete rows manually — values recompute live."
+   "description": "Pre-populated by 'Load Overheads from Books' (Actions menu). Only a Project Approver can load or edit these rows — values recompute live.",
+   "permlevel": 1
   },
   {
-   "collapsible": 1,
    "fieldname": "section_i",
    "fieldtype": "Section Break",
-   "label": "I. Infrastructure & Shared Costs"
+   "label": "Infrastructure & Shared Costs"
   },
   {
    "fieldname": "infrastructure_summary_html",
@@ -380,67 +515,24 @@
    "label": "Infrastructure Cost Summary"
   },
   {
-   "collapsible": 1,
    "fieldname": "infrastructure_details_section",
    "fieldtype": "Section Break",
-   "label": "Detailed line items"
+   "label": "Infrastructure Cost Line Items",
+   "collapsible": 1,
+   "description": "Hosting, licences and other shared infrastructure pulled from the books by a Project Approver."
   },
   {
    "fieldname": "infrastructure_costs",
    "fieldtype": "Table",
    "label": "Infrastructure Costs",
    "options": "Infrastructure Cost Item",
-   "description": "Pre-populated by 'Load Overheads from Books' (Actions menu). You can also add / edit / delete rows manually — values recompute live."
-  },
-  {
-   "fieldname": "section_j",
-   "fieldtype": "Section Break",
-   "label": "J. Estimation Summary"
-  },
-  {
-   "fieldname": "grand_total_hours",
-   "fieldtype": "Float",
-   "label": "Grand Total Hours",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_modules_hours",
-   "fieldtype": "Float",
-   "label": "Module Hours",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_custom_modules_hours",
-   "fieldtype": "Float",
-   "label": "Custom Module Hours",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_integration_hours",
-   "fieldtype": "Float",
-   "label": "Integration Hours",
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_break_j1",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "project_duration_months",
-   "fieldtype": "Int",
-   "label": "Project Duration (months)",
-   "read_only": 1
-  },
-  {
-   "fieldname": "blended_hourly_rate",
-   "fieldtype": "Currency",
-   "label": "Blended Hourly Rate",
-   "read_only": 1
+   "description": "Pre-populated by 'Load Overheads from Books' (Actions menu). Only a Project Approver can load or edit these rows — values recompute live.",
+   "permlevel": 1
   },
   {
    "fieldname": "section_support",
    "fieldtype": "Section Break",
-   "label": "J2. Post Go-Live Support",
+   "label": "Post Go-Live Support",
    "description": "Reserved support hours bundled into this project's cost. Auto-creates a 'Support' task on the linked project once the estimate is Won."
   },
   {
@@ -458,14 +550,14 @@
    "description": "How many months the post-go-live support commitment runs for."
   },
   {
-   "fieldname": "column_break_support1",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "support_hourly_rate",
    "fieldtype": "Currency",
    "label": "Support Hourly Rate (INR)",
    "description": "Defaults to the blended hourly rate if left blank."
+  },
+  {
+   "fieldname": "column_break_support1",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "total_support_hours",
@@ -481,8 +573,8 @@
    "description": "Added to Grand Total Cost — pricing covers support, too."
   },
   {
-   "fieldname": "section_support_notes",
-   "fieldtype": "Section Break"
+   "fieldname": "column_break_support2",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "support_notes",
@@ -491,9 +583,14 @@
    "description": "Scope of the post-go-live support commitment — what's covered, what's not, response-time expectations."
   },
   {
-   "fieldname": "section_k",
+   "fieldname": "tab_pricing",
+   "fieldtype": "Tab Break",
+   "label": "Pricing"
+  },
+  {
+   "fieldname": "section_cost_buildup",
    "fieldtype": "Section Break",
-   "label": "K. Pricing & Profitability"
+   "label": "Cost Build-up"
   },
   {
    "fieldname": "team_cost_total",
@@ -514,6 +611,10 @@
    "read_only": 1
   },
   {
+   "fieldname": "column_break_cost1",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "infrastructure_cost_total",
    "fieldtype": "Currency",
    "label": "Infrastructure Costs Total",
@@ -532,6 +633,11 @@
    "read_only": 1
   },
   {
+   "fieldname": "section_k",
+   "fieldtype": "Section Break",
+   "label": "Pricing Bands"
+  },
+  {
    "default": "30",
    "fieldname": "target_margin_pct",
    "fieldtype": "Float",
@@ -540,8 +646,7 @@
   },
   {
    "fieldname": "column_break_k1",
-   "fieldtype": "Column Break",
-   "label": "Three Pricing Bands"
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "floor_price",
@@ -551,11 +656,19 @@
    "description": "= Grand Total Cost × 1.10. Walk-away price. Margin only ~9%."
   },
   {
+   "fieldname": "column_break_k2",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "standard_price",
    "fieldtype": "Currency",
    "label": "Standard Price",
    "read_only": 1,
    "description": "= Grand Total Cost ÷ (1 − Target Margin %). Hits your target margin exactly."
+  },
+  {
+   "fieldname": "column_break_k3",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "premium_price",
@@ -565,9 +678,9 @@
    "description": "= Standard Price × 1.25. Stretch ceiling when you have leverage. Margin ~44%."
   },
   {
-   "fieldname": "column_break_k2",
-   "fieldtype": "Column Break",
-   "label": "Your Decision"
+   "fieldname": "section_quote",
+   "fieldtype": "Section Break",
+   "label": "Quote"
   },
   {
    "fieldname": "recommended_band",
@@ -592,15 +705,8 @@
    "description": "The actual price agreed with the client. Replaces the band-picked price."
   },
   {
-   "depends_on": "eval:doc.use_custom_price==1",
-   "fieldname": "custom_price_assessment_html",
-   "fieldtype": "HTML",
-   "label": "Custom Price Assessment"
-  },
-  {
-   "fieldname": "column_break_k3",
-   "fieldtype": "Column Break",
-   "label": "Final Output"
+   "fieldname": "column_break_quote1",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "recommended_price",
@@ -617,6 +723,10 @@
    "read_only": 1
   },
   {
+   "fieldname": "column_break_quote2",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "price_per_hour",
    "fieldtype": "Currency",
    "label": "Price Per Hour",
@@ -629,8 +739,22 @@
    "read_only": 1
   },
   {
+   "fieldname": "section_custom_price_assessment",
+   "fieldtype": "Section Break",
+   "depends_on": "eval:doc.use_custom_price==1"
+  },
+  {
+   "depends_on": "eval:doc.use_custom_price==1",
+   "fieldname": "custom_price_assessment_html",
+   "fieldtype": "HTML",
+   "label": "Custom Price Assessment"
+  },
+  {
    "fieldname": "section_k_notes",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Pricing Notes",
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.pricing_notes"
   },
   {
    "fieldname": "pricing_notes",
@@ -639,20 +763,14 @@
    "description": "Negotiation context, justification for custom price, discount rationale, anything that explains why the recommended_price is what it is."
   },
   {
+   "fieldname": "tab_analysis",
+   "fieldtype": "Tab Break",
+   "label": "Risk & Scenarios"
+  },
+  {
    "fieldname": "section_l",
    "fieldtype": "Section Break",
-   "label": "L. Scenario, Sensitivity & Break-even"
-  },
-  {
-   "default": "100",
-   "fieldname": "scenario_custom_pct",
-   "fieldtype": "Float",
-   "label": "Custom Scenario % (of estimate)",
-   "description": "Drives the 'Custom' row in the scenario comparison table below. 100 = baseline; 130 = team takes 1.3× estimated hours."
-  },
-  {
-   "fieldname": "column_break_l1",
-   "fieldtype": "Column Break"
+   "label": "Break-even"
   },
   {
    "fieldname": "break_even_hours",
@@ -662,7 +780,7 @@
    "description": "= (recommended_price − non-team costs) ÷ blended_hourly_rate."
   },
   {
-   "fieldname": "column_break_l2",
+   "fieldname": "column_break_l1",
    "fieldtype": "Column Break"
   },
   {
@@ -673,7 +791,7 @@
    "description": "Break-even hours as a fraction of grand_total_hours. >100% = profitable headroom."
   },
   {
-   "fieldname": "column_break_l3",
+   "fieldname": "column_break_l2",
    "fieldtype": "Column Break"
   },
   {
@@ -689,12 +807,30 @@
    "description": "Optimistic / Base / Pessimistic / Custom — same scope flexed by different effort multipliers."
   },
   {
+   "default": "100",
+   "fieldname": "scenario_custom_pct",
+   "fieldtype": "Float",
+   "label": "Custom Scenario % (of estimate)",
+   "description": "Drives the 'Custom' row in the scenario comparison table below. 100 = baseline; 130 = team takes 1.3× estimated hours."
+  },
+  {
+   "fieldname": "column_break_l3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_l4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_scenario_table",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "scenario_table_html",
    "fieldtype": "HTML",
    "label": "Scenario Comparison Table"
   },
   {
-   "collapsible": 1,
    "fieldname": "section_l_sensitivity",
    "fieldtype": "Section Break",
    "label": "Sensitivity Analysis",
@@ -706,7 +842,6 @@
    "label": "Sensitivity Table"
   },
   {
-   "collapsible": 1,
    "fieldname": "section_l_montecarlo",
    "fieldtype": "Section Break",
    "label": "Monte Carlo — Risk-adjusted Estimate",
@@ -716,26 +851,6 @@
    "fieldname": "monte_carlo_html",
    "fieldtype": "HTML",
    "label": "Monte Carlo Result"
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "section_linked",
-   "fieldtype": "Section Break",
-   "label": "Linked Records"
-  },
-  {
-   "fieldname": "linked_project",
-   "fieldtype": "Link",
-   "label": "Linked Project",
-   "options": "Project",
-   "read_only": 1
-  },
-  {
-   "fieldname": "linked_sales_order",
-   "fieldtype": "Link",
-   "label": "Linked Sales Order",
-   "options": "Sales Order",
-   "read_only": 1
   }
  ],
  "is_submittable": 1,
@@ -746,7 +861,7 @@
    "group": "Project"
   }
  ],
- "modified": "2026-05-26 09:00:00.000000",
+ "modified": "2026-09-30 15:00:00.000000",
  "modified_by": "Administrator",
  "module": "tbo analytics",
  "name": "Implementation Estimate",
@@ -782,6 +897,32 @@
    "cancel": 1,
    "amend": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Approver",
+   "share": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "All"
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "Project Approver",
+   "write": 1
   }
  ],
  "default_print_format": "Implementation Estimate Quote",
@@ -789,14 +930,38 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [
-  {"color": "Blue", "title": "Draft"},
-  {"color": "Orange", "title": "Under Review"},
-  {"color": "Red", "title": "Revision Requested"},
-  {"color": "Green", "title": "Approved"},
-  {"color": "Dark Green", "title": "Won"},
-  {"color": "Gray", "title": "Lost"},
-  {"color": "Yellow", "title": "On Hold"},
-  {"color": "Purple", "title": "Delivered"}
+  {
+   "color": "Blue",
+   "title": "Draft"
+  },
+  {
+   "color": "Orange",
+   "title": "Under Review"
+  },
+  {
+   "color": "Red",
+   "title": "Revision Requested"
+  },
+  {
+   "color": "Green",
+   "title": "Approved"
+  },
+  {
+   "color": "Dark Green",
+   "title": "Won"
+  },
+  {
+   "color": "Gray",
+   "title": "Lost"
+  },
+  {
+   "color": "Yellow",
+   "title": "On Hold"
+  },
+  {
+   "color": "Purple",
+   "title": "Delivered"
+  }
  ],
  "title_field": "client_name",
  "track_changes": 1

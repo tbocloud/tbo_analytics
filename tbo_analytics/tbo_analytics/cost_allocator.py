@@ -19,6 +19,11 @@ DRIVER_PROJECT_COUNT = "Project Count"
 DRIVER_REVENUE       = "Revenue"
 DRIVER_FIXED_PCT     = "Fixed Pct"
 
+# Loading indirect + infrastructure overheads from the books exposes GL totals and
+# overhead-department salary roll-ups, so only approvers may call these endpoints.
+# The form hides the "Load Overheads from Books" action for everyone else.
+OVERHEAD_LOADER_ROLES = ("Project Approver",)
+
 # Backwards-compat mapping for the original Indirect Cost Item.allocation_method values
 LEGACY_DRIVER_MAP = {
 	"Per Head":  DRIVER_HEADCOUNT,
@@ -237,6 +242,7 @@ def pull_overhead_salary_rollup(company):
 	GL account, so the GL-based pull can't tell HR/Accounts salaries apart
 	from billable-team salaries. Roll-up by department sidesteps that entirely.
 	"""
+	frappe.only_for(OVERHEAD_LOADER_ROLES, message=True)
 	result = []
 	for grp in OVERHEAD_DEPARTMENT_GROUPS:
 		patterns = [f"%{k}%" for k in grp["keywords"]]
@@ -459,6 +465,7 @@ def pull_indirect_lines(company, lookback_months=6, include_direct=0):
 	 - Excludes the HR/salary subtree (already captured in direct labour via timesheets).
 	 - If no Indirect group exists, OR include_direct=1, walks every expense leaf.
 	"""
+	frappe.only_for(OVERHEAD_LOADER_ROLES, message=True)
 	lookback_months = int(lookback_months or 6)
 	include_direct  = int(include_direct or 0)
 	cutoff = add_months(nowdate(), -lookback_months)
@@ -521,6 +528,7 @@ def pull_shared_direct_lines(company, lookback_months=6):
 	Each returned row is ready to insert with is_allocated_from_books = 1. The controller
 	will compute project_share_pct via the driver and total_cost = monthly_cost × share × duration.
 	"""
+	frappe.only_for(OVERHEAD_LOADER_ROLES, message=True)
 	lookback_months = int(lookback_months or 6)
 	cutoff = add_months(nowdate(), -lookback_months)
 
@@ -643,6 +651,7 @@ def compute_row_share(row, benchmarks, project_inputs):
 # without any extra conversion on our side.
 @frappe.whitelist()
 def pull_infrastructure_lines(company, lookback_months=6):
+	frappe.only_for(OVERHEAD_LOADER_ROLES, message=True)
 	lookback_months = int(lookback_months or 6)
 	cutoff = add_months(nowdate(), -lookback_months)
 
@@ -692,6 +701,7 @@ def pull_all_overhead(company, lookback_months=6):
 	caller. To preserve the user's right to manually add direct rows, the
 	form's quick-add buttons (Frappe Cloud, Claude AI, etc.) still work.
 	"""
+	frappe.only_for(OVERHEAD_LOADER_ROLES, message=True)
 	indirect = pull_indirect_lines(company, lookback_months)
 	infra = pull_infrastructure_lines(company, lookback_months)
 	# Merge overhead-department salary roll-up (HR, Accounts, Sales/BD) into indirect.

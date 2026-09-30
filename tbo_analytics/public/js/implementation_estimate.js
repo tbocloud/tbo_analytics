@@ -446,7 +446,7 @@ function update_team_allocation_summary(frm) {
 	if (total <= 0) {
 		field.$wrapper.html(`
 			<div style="padding:10px 14px;background:#f5f5f5;border-left:3px solid #888;color:#777;font-size:13px;margin-bottom:8px;">
-				Add modules / customs / integrations in Sections B–D first to see hours to allocate.
+				Add modules, custom modules or integrations on the Scope tab first to see hours to allocate.
 			</div>`);
 		return;
 	}
@@ -464,9 +464,9 @@ function update_team_allocation_summary(frm) {
 
 	// Bucket rows — only show buckets that have hours
 	const buckets = [
-		{ label: "Modules (Section B)",       hrs: t_mod,    color: "#3498db" },
-		{ label: "Custom Modules (Section C)", hrs: t_custom, color: "#9b59b6" },
-		{ label: "Integrations (Section D)",   hrs: t_integr, color: "#1abc9c" },
+		{ label: "Standard Modules",           hrs: t_mod,    color: "#3498db" },
+		{ label: "Custom Modules",             hrs: t_custom, color: "#9b59b6" },
+		{ label: "Integrations",               hrs: t_integr, color: "#1abc9c" },
 	].filter(b => b.hrs > 0);
 
 	const bucket_rows = buckets.map(b => `
@@ -496,7 +496,7 @@ function update_team_allocation_summary(frm) {
 			<div style="flex:1;min-width:240px;">
 				<div style="font-size:11px;color:#666;text-transform:uppercase;margin-bottom:2px;">Total Hours Needed</div>
 				<div style="font-size:30px;font-weight:700;line-height:1;color:#2c3e50;">${fmt_hours(total)}</div>
-				<div style="font-size:12px;color:#888;margin-top:4px;">From Sections B + C + D</div>
+				<div style="font-size:12px;color:#888;margin-top:4px;">From the Scope tab</div>
 			</div>
 			<div style="flex:1;min-width:240px;">
 				<div style="font-size:11px;color:#666;text-transform:uppercase;margin-bottom:2px;">Allocated</div>
@@ -544,15 +544,22 @@ function update_team_capacity(frm) {
 	}).catch(() => {});
 }
 
+// Indirect + infrastructure rows are permlevel 1: only Project Approver can load or edit them.
+function overhead_load_hint() {
+	return frappe.user.has_role("Project Approver")
+		? "Actions → Load Overheads from Books"
+		: "a Project Approver loads these from the books";
+}
+
 function update_indirect_summary(frm) {
 	const field = frm.fields_dict && frm.fields_dict["indirect_summary_html"];
 	if (!field || !field.$wrapper) return;
 	if (frm.is_new()) {
-		field.$wrapper.html("<p style='color:#888;margin:8px 0;'>Save first — then Actions → Load Indirect Costs from Books.</p>");
+		field.$wrapper.html(`<p style='color:#888;margin:8px 0;'>Save first — then ${overhead_load_hint()}.</p>`);
 		return;
 	}
 	if (!(frm.doc.indirect_costs || []).length) {
-		field.$wrapper.html("<p style='color:#888;margin:8px 0;'>No indirect costs loaded. Click Actions → Load Indirect Costs from Books.</p>");
+		field.$wrapper.html(`<p style='color:#888;margin:8px 0;'>No indirect costs loaded yet — ${overhead_load_hint()}.</p>`);
 		return;
 	}
 	frappe.call({
@@ -567,11 +574,11 @@ function update_infrastructure_summary(frm) {
 	const field = frm.fields_dict && frm.fields_dict["infrastructure_summary_html"];
 	if (!field || !field.$wrapper) return;
 	if (frm.is_new()) {
-		field.$wrapper.html("<p style='color:#888;margin:8px 0;'>Save first — then add infrastructure cost rows.</p>");
+		field.$wrapper.html(`<p style='color:#888;margin:8px 0;'>Save first — then ${overhead_load_hint()}.</p>`);
 		return;
 	}
 	if (!(frm.doc.infrastructure_costs || []).length) {
-		field.$wrapper.html("<p style='color:#888;margin:8px 0;'>No infrastructure costs added yet.</p>");
+		field.$wrapper.html(`<p style='color:#888;margin:8px 0;'>No infrastructure costs added yet — ${overhead_load_hint()}.</p>`);
 		return;
 	}
 	frappe.call({
@@ -1061,7 +1068,7 @@ function update_custom_price_assessment(frm) {
 			</tr>
 		</table>
 		<p style="font-size:11px;color:#888;margin-top:6px;">
-			Scenarios, sensitivity & break-even already use this price. Re-run Monte Carlo (Section L) to refresh loss probability.
+			Scenarios, sensitivity & break-even already use this price. Re-run Monte Carlo (Risk &amp; Scenarios tab) to refresh loss probability.
 		</p>
 	`);
 }
@@ -1330,69 +1337,98 @@ function load_all_overheads_from_books(frm) {
 	}, __("Load Overheads from Books"), __("Load"));
 }
 
+// Our buttons live in the same "Actions" dropdown as Frappe's workflow
+// transitions, so the form shows one Actions menu instead of two.
+// The workflow (asynchronously, after refresh) and the toolbar's dirty handler
+// both call page.clear_actions_menu(), which would wipe our items — so we wrap
+// it to re-add them every time the menu is cleared.
 function setup_custom_buttons(frm) {
-	// ── Always-available buttons (work on new + saved estimates) ──
+	const page = frm.page;
+	if (!page._tbo_actions_patched) {
+		const clear_actions_menu = page.clear_actions_menu.bind(page);
+		page.clear_actions_menu = function () {
+			clear_actions_menu();
+			add_estimate_actions(frm);
+		};
+		page._tbo_actions_patched = true;
+	}
+	add_estimate_actions(frm);
+}
 
-	// One button that pulls shared-direct + indirect + infrastructure in a single
+function add_estimate_actions(frm) {
+	// Drop the items we added last time (doc state may have changed) without
+	// touching the workflow's items.
+	(frm._tbo_action_items || []).forEach($a => $a.closest("li").remove());
+	frm._tbo_action_items = [];
+
+	// standard=true appends below the workflow transitions (Frappe inserts a
+	// divider between the two groups).
+	const add = (label, click) => {
+		frm._tbo_action_items.push(frm.page.add_action_item(label, click, true));
+	};
+
+	// ── Always-available actions (work on new + saved estimates) ──
+
+	// One action that pulls shared-direct + indirect + infrastructure in a single
 	// round-trip. Replaces the prior three-button set. All values in INR (company base).
-	frm.add_custom_button(__("Load Overheads from Books"), () => {
-		load_all_overheads_from_books(frm);
-	}, __("Actions"));
+	// Approvers only — the server endpoints enforce the same role (cost_allocator.OVERHEAD_LOADER_ROLES).
+	if (frappe.user.has_role("Project Approver")) {
+		add(__("Load Overheads from Books"), () => {
+			load_all_overheads_from_books(frm);
+		});
+	}
 
 	// "Recalculate AI Estimates" — frm.save() works for both new and saved docs.
-	frm.add_custom_button(__("Recalculate AI Estimates"), () => {
+	add(__("Recalculate AI Estimates"), () => {
 		frappe.confirm(
 			"This will re-run the AI estimation engine and update all AI-estimated hour fields. Continue?",
 			() => frm.save()
 		);
-	}, __("Actions"));
+	});
 
-	// ── Saved-doc-only buttons (need a persisted doc / workflow state) ──
+	// ── Saved-doc-only actions (need a persisted doc / workflow state) ──
 	if (frm.is_new()) return;
 
 	// "Create Project" — explicit trigger for the Won → Project workflow.
 	// The same call runs automatically on status change, but exposing it as a button
 	// lets the user retry on failure and see errors instead of them being swallowed.
 	if (frm.doc.status === "Won" && !frm.doc.linked_project) {
-		frm.add_custom_button(__("Create Project"), () => {
+		add(__("Create Project"), () => {
 			// Open a pre-filled new Project form. The back-link Custom Field
 			// (custom_implementation_estimate) carries the estimate name through to
 			// after_insert, which mirrors the link back to this estimate once the
 			// user saves. No silent server insert — the user reviews everything first.
-			const default_name = `${frm.doc.client_name || ""} — ERPNext Implementation (${frm.doc.name})`;
+			//
+			// Not frappe.new_doc(): it drops no_copy fields (custom_implementation_estimate
+			// is no_copy so Duplicate doesn't carry the link), and Project's Quick Entry
+			// dialog would let the user save without seeing the full form. Build the doc
+			// ourselves and open the full form instead.
 			const est_name = frm.doc.name;
-			frappe.new_doc("Project", {
-				project_name:                    default_name,
-				customer:                        frm.doc.client_name,
-				expected_start_date:             frappe.datetime.get_today(),
-				expected_end_date:               frm.doc.expected_go_live,
-				estimated_costing:               frm.doc.recommended_price,
-				notes:                           `Created from Implementation Estimate ${est_name}`,
-				custom_implementation_estimate:  est_name,
+			frappe.model.with_doctype("Project", () => {
+				const project = frappe.model.get_new_doc("Project");
+				Object.assign(project, {
+					project_name:                    `${frm.doc.client_name || ""} — ERPNext Implementation (${est_name})`,
+					customer:                        frm.doc.client_type === "Customer" ? frm.doc.client_name : undefined,
+					expected_start_date:             frappe.datetime.get_today(),
+					expected_end_date:               frm.doc.expected_go_live,
+					estimated_costing:               frm.doc.recommended_price,
+					notes:                           `Created from Implementation Estimate ${est_name}`,
+					custom_implementation_estimate:  est_name,
+				});
+				frappe.set_route("Form", "Project", project.name);
 			});
-			// Belt-and-braces: re-apply the back-link after the form has loaded.
-			// Defends against the case where Project's doctype-meta cache is stale
-			// (e.g., no bench restart since Custom Field install) and Frappe silently
-			// drops unknown fields from the new_doc payload.
-			setTimeout(() => {
-				if (cur_frm && cur_frm.doc && cur_frm.doc.doctype === "Project"
-				    && cur_frm.is_new()
-				    && !cur_frm.doc.custom_implementation_estimate) {
-					try { cur_frm.set_value("custom_implementation_estimate", est_name); } catch (e) {}
-				}
-			}, 600);
-		}, __("Actions")).addClass("btn-primary");
+		});
 	}
 
 	// "Open Linked Project" — quick navigation once project exists.
 	if (frm.doc.linked_project) {
-		frm.add_custom_button(__("Open Linked Project"), () => {
+		add(__("Open Linked Project"), () => {
 			frappe.set_route("Form", "Project", frm.doc.linked_project);
-		}, __("Actions"));
+		});
 	}
 
 	// Workflow transitions are driven exclusively by Frappe's built-in workflow
-	// action button (top-right of the form). That button respects the role
+	// actions (added to this same menu by Frappe). Those respect the role
 	// restrictions defined in fixtures/workflow.json — Projects Manager sees
 	// Submit for Review / Resubmit; Project Approver sees Approve / Request
 	// Revision / Mark Won / Mark Lost / Put on Hold / Resume. We deliberately

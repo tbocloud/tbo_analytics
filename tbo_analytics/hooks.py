@@ -113,7 +113,7 @@ doctype_js = {
 # Installation
 # ------------
 
-# before_install = "tbo_analytics.install.before_install"
+before_install = "tbo_analytics.install.before_install"
 # after_install = "tbo_analytics.install.after_install"
 
 # Uninstallation

@@ -578,7 +578,7 @@ def run_monte_carlo(estimate_name, n_runs=1000,
 
 def _summary_html(title, lines, total_allocated, dur, company_monthly_sum, effective_share_pct, source_note):
 	"""Shared HTML builder for Indirect + Infrastructure summary widgets."""
-	cats = ", ".join(
+	cats = "".join(
 		f"<tr><td style='padding:4px 8px;'>{frappe.utils.escape_html(c)}</td>"
 		f"<td style='padding:4px 8px;text-align:right;'>₹{amt:,.0f}</td>"
 		f"<td style='padding:4px 8px;text-align:right;color:#888;'>{(amt/total_allocated*100 if total_allocated else 0):.1f}%</td></tr>"
@@ -611,7 +611,7 @@ def get_indirect_summary(estimate_name):
 		return (
 			"<p style='color:#888;margin:8px 0;'>"
 			"No indirect costs loaded yet. "
-			"Click <b>Actions → Load Indirect Costs from Books</b> to pull live averages."
+			"A Project Approver loads them via <b>Actions → Load Overheads from Books</b>."
 			"</p>"
 		)
 	dur = max(int(doc.project_duration_months or 1), 1)
